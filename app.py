@@ -1,26 +1,34 @@
-import subprocess
-from subprocess import Popen, PIPE
-import zerorpc
-import threading
+import netifaces
+import ipaddress
+from agent import Agent
 
-client = zerorpc.Client()
-client.connect('tcp://127.0.0.1:9000')
-
-e =threading.Event()
-
-while True:
-    res = client.hello('asdasd')
-    print(res)
-    print("~"*50)
-    e.wait(3)
-
-client.close()
+if __name__ == "__main__":
+    agent = Agent()
+    try:
+        agent.start()
+    except Exception as e:
+        agent.shutdown()
 
 
-
-proc = Popen('echo "hello"', shell=True, stdout=PIPE)
-code = proc.wait()
-print(code)
-
-txt = proc.stdout.read()
-print(txt)
+# ifaces = netifaces.interfaces()
+# #print(ifaces)
+#
+# addresses = []
+#
+# for iface in ifaces:
+#     ips = netifaces.ifaddresses(iface)
+#     # print(ips)
+#     if 2 in ips:
+#         for ip in ips[2]:
+#             address = ipaddress.ip_address(ip['addr'])
+#             if address.is_link_local or address.is_loopback or address.is_loopback \
+#                 or address.is_reserved:
+#                 continue
+#             addresses.append(address)
+#             print(addresses)
+# proc = Popen('echo "hello"', shell=True, stdout=PIPE)
+# code = proc.wait()
+# print(code)
+#
+# txt = proc.stdout.read()
+# print(txt)
