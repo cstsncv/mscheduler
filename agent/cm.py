@@ -11,18 +11,23 @@ class ConnectionManage:
         self.client = zerorpc.Client()
         self.event = threading.Event()
         self.message = Message('d:/myid')
+        self.state = False   #当任务完成
 
-    def start(self,timeout=5):
+    def start(self, timeout=5):
         try:
-            self.event.clear()
+            self.event.clear()  #重置event
             self.client.connect(CONNECTIONURL)  #建立连接
             rex = self.message.reg()
             logger.info(self.client.sendmsg(rex))
             while not self.event.wait(timeout):
                 logger.info(self.client.sendmsg(self.message.heartbeat()))
+                if self.state:
+                    self.client.sendmsg(self.message.result())
+                    self.state = False
         except Exception as e:
             logger.error("{}".format(e))
             raise e
+
     def shutdown(self):
         self.event.set()
         self.client.close()

@@ -1,4 +1,4 @@
-#程序执行
+#程序执行,返回结果状态码和程序运行结果
 
 from subprocess import Popen, PIPE
 
@@ -15,8 +15,10 @@ class Executor:
         return code, txt
 
 
-# e = Executor('echo "asdasdas"')
-# print(e.run())
+ #e = Executor('echo "asdasdas"')
+e = Executor('ipconfig /all1')
+p = e.run()
+print(p[0],p[1].decode('gbk'))
 
 
 

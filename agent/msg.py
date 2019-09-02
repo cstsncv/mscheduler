@@ -50,9 +50,16 @@ class Message:
                 }
         }
 
-
-
-
+    def result(self):
+        return {
+            "type": "result",
+            "payload": {
+                "agent_id": self.id,
+                "task_id": "tsk_id",
+                "dode": 0,
+                "output": "base64encode"
+            }
+        }
 
 
 
