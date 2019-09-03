@@ -50,14 +50,14 @@ class Message:
                 }
         }
 
-    def result(self):
+    def result(self, task_id, code, output):  #返回给master的执行结果信息
         return {
             "type": "result",
             "payload": {
                 "agent_id": self.id,
-                "task_id": "tsk_id",
-                "dode": 0,
-                "output": "base64encode"
+                "id": task_id,
+                "code": code,
+                "output": output
             }
         }
 

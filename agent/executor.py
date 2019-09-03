@@ -3,22 +3,22 @@
 from subprocess import Popen, PIPE
 
 class Executor:
-    def __init__(self, script, timeout=None):
-        self.script = script
-        self.timeout = timeout
+    # def __init__(self, script, timeout=None):
+    #     self.script = script
+    #     self.timeout = timeout
 
-    def run(self):
-        proc = Popen(self.script, shell=True, stdout=PIPE)
-        code = proc.wait(self.timeout)
+    def run(self, script, timeout=None):
+        proc = Popen(script, shell=True, stdout=PIPE)
+        code = proc.wait(timeout)
         txt = proc.stdout.read()
         # print(code, txt)
         return code, txt
 
 
  #e = Executor('echo "asdasdas"')
-e = Executor('ipconfig /all1')
-p = e.run()
-print(p[0],p[1].decode('gbk'))
+# e = Executor('ipconfig /all1')
+# p = e.run()
+# print(p[0],p[1].decode('gbk'))
 
 
 

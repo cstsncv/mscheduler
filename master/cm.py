@@ -19,6 +19,9 @@ class ConnectionManager:
         try:
             if msg['type'] in {'register', 'heartbeat'}:
                 self.store.reg_hb(**msg['payload'])
+            elif msg['type'] == "result":
+                self.store.result(msg['payload'])
+
             print(self.store.get_agents())
             return ' ack {}'.format(msg)
             #return '{"a":1,"b":{"c":2,"d":3},"e":4}'
@@ -26,13 +29,14 @@ class ConnectionManager:
             pass
     sendmsg = handle
 
-    def add_task(self, msg:dict):
+    def add_task(self, msg: dict):
+        return self.store.add_task(msg)
 
-        self.store.add_task(msg)
+    def get_task(self, agent_id):
+        return self.store.get_task(agent_id)
 
-
-
-
+    def get_agents(self):
+        return self.store.get_agents()
 
 
 
