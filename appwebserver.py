@@ -18,7 +18,7 @@ async def addtaskhandler(request:web.Request):
 #创建Webserver
 app = web.Application()
 app.router.add_get('/task/agents', targetshandler)
-app.router.add_get('/task', addtaskhandler)
+app.router.add_post('/task', addtaskhandler)
 
 web.run_app(app, host='0.0.0.0', port=9900)
 

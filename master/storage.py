@@ -23,7 +23,7 @@ class Storage:
     def get_agents(self):
         return list(self.agents.keys())
 
-    def add_task(self,msg:dict):
+    def add_task(self, msg: dict):
         msg['task_id'] = uuid.uuid4().hex
         task = Task(**msg)
         self.tasks[task.id] = task
